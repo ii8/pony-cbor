@@ -272,7 +272,8 @@ primitive CborHash is HashFunction[CborType]
       | let x: CborTag => return eq(x.item, c)
       end
       match c
-      | let x: (None | Bool | Number) => x is c'
+      | let x: (None | Bool) => x is c'
+      | let n: Number => n.i128() == (c' as Number).i128()
       | let b: Array[U8] val =>
         String.from_array(b) == String.from_array(c' as Array[U8] val)
       | let s: String => s == (c' as String)
