@@ -183,10 +183,10 @@ class val CborArray
   new val create(a: Array[CborType] val) =>
     items = a
 
-  fun hash(): U64 =>
+  fun hash(): USize =>
     /* If anyone ever needs performace for arrays as map keys(unlikely) then
      * implement something more advanced here */
-    items.size().u64()
+    items.size()
 
   fun eq(c: CborType): Bool =>
     try
@@ -222,7 +222,7 @@ class val CborMap
       m
     end
 
-  fun hash(): U64 =>
+  fun hash(): USize =>
     digestof pairs
 
   fun eq(c: CborType): Bool =>
@@ -236,7 +236,7 @@ class val CborTag
     value = value'
     item = item'
 
-  fun hash(): U64 =>
+  fun hash(): USize =>
     CborHash.hash(item)
 
 class val CborSimple
@@ -245,8 +245,8 @@ class val CborSimple
   new val create(value': U8) =>
     value = value'
 
-  fun hash(): U64 =>
-    value.u64()
+  fun hash(): USize =>
+    value.usize()
 
   fun eq(c: CborType): Bool =>
     try
@@ -257,7 +257,7 @@ class val CborSimple
     end
 
 primitive CborHash is HashFunction[CborType]
-  fun hash(c: CborType): U64 =>
+  fun hash(c: CborType): USize =>
     match c
     | None => 9000
     | let b: Bool => if b then 9001 else 9002 end
