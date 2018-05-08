@@ -271,6 +271,8 @@ class iso _DecodeMap is UnitTest
       CborMap.from_array(["lol"; U8(2); "hi"; U8(1)]))
     _H.dec(h, [0xa2; 0x01; 0x00; 0x19; 0x00; 0x01; 0x00],
       CborMap.from_array([U8(1); U8(0)]))
+    _H.dec(h, [0xa2; 0xc6; 0x01; 0x01; 0xc6; 0x02; 0x01],
+      CborMap.from_array([U8(1); U8(1); U8(2); U8(1)]))
 
 class iso _DecodeTag is UnitTest
   fun name(): String => "decode.tag"
