@@ -1,7 +1,7 @@
 use "ponytest"
 use "buffered"
 use "collections"
-use ".."
+use "../cbor"
 
 actor Main is TestList
   new create(env: Env) => PonyTest(env, this)
